@@ -57,22 +57,4 @@ git remote -v
 git remote set-url origin https://github.com/yourusername/peptide-toxicity-prediction.git
 ```
 
-## What Will Be Uploaded
-
-✅ **Included:**
-- `START_HERE.md` (new)
-- `INSTALLATION.md` (updated)
-- `README.md` (updated)
-- `GITHUB_SETUP.md` (new)
-- `.gitignore` (updated)
-
-❌ **Excluded** (by .gitignore):
-- `LEARNING_GUIDE.md`
-- `COMPLETE_DOCUMENTATION.md`
-- `COMPLETE_SETUP_GUIDE.md`
-- `DATA_SETUP.md`
-- `node_modules/`
-- `venv/`
-- `results/`
-- `data/raw/*.fasta`
 
