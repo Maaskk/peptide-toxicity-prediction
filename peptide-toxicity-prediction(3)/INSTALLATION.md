@@ -1,6 +1,8 @@
 # Installation Guide
 
-Quick setup guide for running this project on your local machine.
+**👉 This is the main installation file. Follow these steps in order to get the project running.**
+
+Complete step-by-step guide for running this project on your local machine.
 
 ## Prerequisites
 
@@ -158,5 +160,17 @@ You should see the Peptide Toxicity Prediction application!
 
 ## Need Help?
 
-Check the main `README.md` for more detailed information about the project.
+- Check the **Troubleshooting** section above
+- Read `README.md` for project overview
+- Make sure you followed all steps in order
+- Verify all prerequisites are installed correctly
+
+## What's Next?
+
+After installation:
+- ✅ Backend running on `http://localhost:3000`
+- ✅ Frontend running on `http://localhost:5173`
+- ✅ Open browser and start using the app!
+
+**Tip:** Keep both terminals open (backend and frontend). Press `Ctrl+C` to stop each server.
 

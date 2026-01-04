@@ -2,6 +2,10 @@
 
 A production-quality machine learning pipeline for predicting peptide toxicity from amino acid sequences. This project implements comprehensive feature extraction, multiple ML algorithms, rigorous evaluation, and biological interpretation suitable for academic research.
 
+## 👋 New to this project?
+
+**👉 Start with [START_HERE.md](START_HERE.md) for clear installation instructions!**
+
 ## 🎯 Project Overview
 
 This bioinformatics tool predicts whether peptide sequences are toxic or non-toxic using machine learning. It analyzes amino acid composition, physicochemical properties, and sequence characteristics to identify molecular signatures associated with toxicity.
@@ -37,17 +41,15 @@ This bioinformatics tool predicts whether peptide sequences are toxic or non-tox
 └── README.md                     # This file
 ```
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
-For detailed installation instructions, see [INSTALLATION.md](INSTALLATION.md)
+**👉 NEW USERS: Follow the [INSTALLATION.md](INSTALLATION.md) guide step-by-step**
 
-### Prerequisites
+This is the complete, beginner-friendly installation guide that will walk you through everything.
 
-- Python 3.8 or higher
-- Node.js 18 or higher
-- npm (comes with Node.js)
+### Quick Reference
 
-### Quick Installation
+If you're experienced and just need the commands:
 
 ```bash
 # Clone repository
@@ -77,6 +79,12 @@ npm run dev
 ```
 
 Open `http://localhost:5173` in your browser.
+
+### Prerequisites
+
+- **Python 3.8+** ([Download](https://www.python.org/downloads/))
+- **Node.js 18+** ([Download](https://nodejs.org/))
+- **npm** (comes with Node.js)
 
 ### Step 2: Create Virtual Environment (Recommended)
 
