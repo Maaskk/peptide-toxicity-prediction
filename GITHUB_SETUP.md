@@ -1,0 +1,1 @@
+docs/GITHUB_SETUP.md
