@@ -70,7 +70,7 @@ export class DatabaseService {
 
   async getRecentPredictions(limit = 20): Promise<any[]> {
     return new Promise((resolve, reject) => {
-      this.db.all(`SELECT * FROM predictions ORDER BY created_at DESC LIMIT ?`, [limit], (err: Error, rows: any[]) => {
+      this.db.all(`SELECT * FROM predictions ORDER BY id DESC LIMIT ?`, [limit], (err: Error, rows: any[]) => {
         if (err) reject(err)
         else resolve(rows)
       })

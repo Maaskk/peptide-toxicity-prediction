@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { Dna, Sun, Moon, Menu } from 'lucide-vue-next'
 
@@ -79,10 +79,25 @@ const navigation = [
 
 const toggleTheme = () => {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
-  document.documentElement.classList.toggle('dark')
+  if (theme.value === 'dark') {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+  localStorage.setItem('theme', theme.value)
 }
 
-document.documentElement.classList.add('dark')
+onMounted(() => {
+  const saved = localStorage.getItem('theme')
+  if (saved === 'light' || saved === 'dark') {
+    theme.value = saved
+  }
+  if (theme.value === 'dark') {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+})
 </script>
 
 <style scoped>

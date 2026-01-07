@@ -14,24 +14,25 @@ export class PredictionService {
 
   async predictSingle(dto: PredictSequenceDto) {
     const { sequence, model } = dto
+    const cleaned = this.sanitizeSequence(sequence)
 
-    if (!this.isValidPeptideSequence(sequence)) {
+    if (!this.isValidPeptideSequence(cleaned)) {
       throw new BadRequestException("Invalid peptide sequence. Only standard amino acids are allowed.")
     }
 
-    const result = await this.pythonBridge.predict([sequence], model)
+    const result = await this.pythonBridge.predict([cleaned], model)
 
     const predictionId = this.generateId()
     const prediction = {
       id: predictionId,
-      sequence,
+      sequence: cleaned,
       model: model || "ensemble",
       result: result[0],
       timestamp: new Date().toISOString(),
     }
 
     await this.database.addPrediction({
-      sequence,
+      sequence: cleaned,
       model: model || "ensemble",
       prediction: result[0].prediction,
       confidence: result[0].confidence,
@@ -47,23 +48,40 @@ export class PredictionService {
 
   async predictBatch(dto: BatchPredictDto) {
     const { sequences, model } = dto
+    const cleanedSequences = sequences.map((s) => this.sanitizeSequence(s))
 
-    const invalidSequences = sequences.filter((seq) => !this.isValidPeptideSequence(seq))
+    const invalidSequences = cleanedSequences
+      .map((seq, idx) => ({ seq, idx }))
+      .filter(({ seq }) => !this.isValidPeptideSequence(seq))
     if (invalidSequences.length > 0) {
-      throw new BadRequestException(`Invalid sequences found: ${invalidSequences.join(", ")}`)
+      const bad = invalidSequences.map(({ seq, idx }) => sequences[idx] || seq)
+      throw new BadRequestException(`Invalid sequences found: ${bad.join(", ")}`)
     }
 
-    const results = await this.pythonBridge.predict(sequences, model) as Array<{
+    const results = await this.pythonBridge.predict(cleanedSequences, model) as Array<{
       prediction: string
       confidence: number
       probability: { toxic: number; non_toxic: number }
     }>
 
     const batchId = this.generateId()
-    const predictions = sequences.map((seq, idx) => ({
+    const predictions = cleanedSequences.map((seq, idx) => ({
       sequence: seq,
       result: results[idx],
     }))
+
+    await Promise.all(
+      predictions.map((p) =>
+        this.database.addPrediction({
+          sequence: p.sequence,
+          model: model || "ensemble",
+          prediction: p.result.prediction,
+          confidence: p.result.confidence,
+          toxicProbability: p.result.probability.toxic,
+          nonToxicProbability: p.result.probability.non_toxic,
+        }),
+      ),
+    )
 
     const batchPrediction = {
       id: batchId,
@@ -130,11 +148,15 @@ export class PredictionService {
   }
 
   private isValidPeptideSequence(sequence: string): boolean {
-    const validAminoAcids = "ACDEFGHIKLMNPQRSTVWY"
-    return sequence.split("").every((aa) => validAminoAcids.includes(aa))
+    if (!sequence) return false
+    return /^[ACDEFGHIKLMNPQRSTVWY]+$/.test(sequence)
   }
 
   private generateId(): string {
     return `pred_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+  }
+
+  private sanitizeSequence(sequence: string): string {
+    return (sequence || "").trim().toUpperCase().replace(/\s+/g, "")
   }
 }
