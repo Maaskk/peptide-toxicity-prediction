@@ -2,7 +2,26 @@
 
 **Welcome! This is the main file you should follow to install and run this project.**
 
-## 📋 What to Follow (In Order)
+## 🐳 Easiest Way: Docker (Recommended)
+
+**If you want the simplest setup that works everywhere:**
+
+→ **[DOCKER_GUIDE.md](DOCKER_GUIDE.md)** - Complete Docker installation guide
+
+Just install Docker Desktop and run:
+```bash
+docker-compose up --build
+```
+
+**Why Docker?**
+- ✅ Works on Windows, macOS, Linux
+- ✅ No need to install Python or Node.js manually
+- ✅ All dependencies included
+- ✅ One command to start everything
+
+---
+
+## 📋 Alternative: Manual Installation
 
 ### For First-Time Users:
 1. **Read this file** (`START_HERE.md`) - You're here! ✅

@@ -4,7 +4,15 @@ A production-quality machine learning pipeline for predicting peptide toxicity f
 
 ## 👋 New to this project?
 
-**👉 Start with [START_HERE.md](START_HERE.md) for clear installation instructions!**
+**🐳 EASIEST WAY: Use Docker! → [DOCKER_GUIDE.md](DOCKER_GUIDE.md)**
+
+**📖 Manual Installation: → [START_HERE.md](START_HERE.md)**
+
+### Why Docker?
+- ✅ Works on Windows, macOS, and Linux
+- ✅ No need to install Python, Node.js, or dependencies
+- ✅ One command to run everything
+- ✅ No compatibility issues
 
 ## 🎯 Project Overview
 
@@ -43,11 +51,28 @@ This bioinformatics tool predicts whether peptide sequences are toxic or non-tox
 
 ## 🚀 Getting Started
 
+### Option 1: Docker (Recommended) 🐳
+
+```bash
+# Clone repository
+git clone https://github.com/Maaskk/peptide-toxicity-prediction.git
+cd peptide-toxicity-prediction
+
+# Start with Docker (that's it!)
+docker-compose up --build
+
+# Open http://localhost:3000 in your browser
+```
+
+**📖 Full Docker Guide: [DOCKER_GUIDE.md](DOCKER_GUIDE.md)**
+
+### Option 2: Manual Installation
+
 **👉 NEW USERS: Follow the [INSTALLATION.md](INSTALLATION.md) guide step-by-step**
 
 This is the complete, beginner-friendly installation guide that will walk you through everything.
 
-### Quick Reference
+### Option 3: Quick Reference (Experienced Users)
 
 If you're experienced and just need the commands:
 
